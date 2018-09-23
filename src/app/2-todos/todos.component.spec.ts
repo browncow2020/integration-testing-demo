@@ -38,17 +38,23 @@ describe('TodosComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load todos from the server', () => {
+  it('should load todos from the server', async(() => {
+    // Also look at fakeAsync and tick as alternative to async and the whenStable being shown here!!!
+
     // simpler way where provider at app module level, not component level
     const service = TestBed.get(TodoService);
-    spyOn(service, 'getTodos').and.returnValue(Observable.from( [ [1, 2, 3] ] ));
+    // spyOn(service, 'getTodos').and.returnValue(Observable.from( [ [1, 2, 3] ] ));
+    spyOn(service, 'getTodosPromise').and.returnValue(Promise.resolve([1, 2, 3]));
 
     fixture.detectChanges();
-
-    expect(component.todos.length).toBe(3);
+    fixture.whenStable().then(() => {
+      expect(component.todos.length).toBe(3);
+    });
+    // expect(component.todos.length).toBe(3);
+    // console.log('Expect was called');
 
     // when provider at the component level
     // const service = fixture.debugElement.injector.get(TodoService);
 
-  });
+  }));
 });
