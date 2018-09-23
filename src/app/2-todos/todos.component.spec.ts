@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 
 import { TodosComponent } from './todos.component';
 import { TodoService } from './todo.service';
